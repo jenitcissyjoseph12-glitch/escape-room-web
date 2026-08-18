@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cyber Escape Room</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Custom glow and glassmorphic styles */
+
+        .glow-box {
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+        }
+
+        .glow-success {
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.4);
+        }
+
+        .glow-error {
+            box-shadow: 0 0 30px rgba(248, 113, 113, 0.4);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Room Container -->
+    <div class="max-w-md w-full bg-slate-900/90 backdrop-blur-xl border border-slate-700 rounded-2xl p-6 sm:p-8 glow-box text-center shadow-2xl">
+
+        <!-- Title Section -->
+        <h1
+            id="title"
+            class="text-2xl sm:text-3xl font-black text-sky-400 tracking-wider uppercase mb-2"
+        >
+            CYBER ESCAPE: NEON DUNGEON
+        </h1>
+
+        <p class="text-xs text-slate-400 mb-6">
+            Enter passcode to override security door lock
+        </p>
+
+
+        <!-- Display Screen -->
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 mb-6">
+
+            <!-- Passcode Display -->
+            <div
+                id="passcode-display"
+                class="text-3xl font-mono tracking-[0.5em] text-slate-500 h-12 flex items-center justify-center"
+            >
+                ----
+            </div>
+
+
+            <!-- Status Indicator + Message -->
+            <div class="flex items-center justify-center gap-2 mt-3">
+
+                <span
+                    id="status-indicator"
+                    class="w-2.5 h-2.5 rounded-full bg-rose-400 animate-pulse"
+                ></span>
+
+                <div
+                    id="status-message"
+                    class="text-xs font-semibold text-slate-400 uppercase tracking-wide"
+                >
+                    SYSTEM LOCKED
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Keypad Buttons Grid -->
+        <div class="grid grid-cols-3 gap-3 mb-6">
+
+            <!-- 1 -->
+            <button
+                onclick="pressNum('1')"
+                class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-150 py-3 rounded-lg text-lg font-bold border border-slate-700"
+            >
+                1
+            </button>
+
+            <!-- 2 -->
+            <button
+                onclick="pressNum('2')"
+                class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-150 py-3 rounded-lg text-lg font-bold border border-slate-700"
+            >
+                2
+            </button>
+
+            <!-- 3 -->
+            <button
+                onclick="pressNum('3')"
+                class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-150 py-3 rounded-lg text-lg font-bold border border-slate-700"
+            >
+                3
+            </button>
+
+
+            <!-- 4 -->
+            <button
+                onclick="pressNum('4')"
+                class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-150 py-3 rounded-lg text-lg font-bold border border-slate-700"
+            >
+                4
+            </button>
+
+            <!-- 5 -->
+            <button
+                onclick="pressNum('5')"
+                class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-150 py-3 rounded-lg text-lg font-bold border border-slate-700"
+            >
+                5
+            </button>
+
+            <!-- 6 -->
+            <button
+                onclick="pressNum('6')"
+                class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-150 py-3 rounded-lg text-lg font-bold border border-slate-700"
+            >
+                6
+            </button>
+
+
+            <!-- 7 -->
+            <button
+                onclick="pressNum('7')"
+                class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-150 py-3 rounded-lg text-lg font-bold border border-slate-700"
+            >
+                7
+            </button>
+
+            <!-- 8 -->
+            <button
+                onclick="pressNum('8')"
+                class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-150 py-3 rounded-lg text-lg font-bold border border-slate-700"
+            >
+                8
+            </button>
+
+            <!-- 9 -->
+            <button
+                onclick="pressNum('9')"
+                class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-150 py-3 rounded-lg text-lg font-bold border border-slate-700"
+            >
+                9
+            </button>
+
+
+            <!-- Clear Button -->
+            <button
+                onclick="clearInput()"
+                class="bg-rose-950 text-rose-300 hover:bg-rose-900 active:scale-95 transition-all duration-150 py-3 rounded-lg font-bold text-sm border border-rose-900"
+            >
+                CLR
+            </button>
+
+            <!-- 0 -->
+            <button
+                onclick="pressNum('0')"
+                class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition-all duration-150 py-3 rounded-lg text-lg font-bold border border-slate-700"
+            >
+                0
+            </button>
+
+            <!-- Enter Button -->
+            <button
+                onclick="submitCode()"
+                class="bg-sky-600 text-white hover:bg-sky-500 active:scale-95 transition-all duration-150 py-3 rounded-lg font-bold text-sm border border-sky-400/30 shadow-lg shadow-sky-500/20"
+            >
+                ENT
+            </button>
+
+        </div>
+
+
+        <!-- Security Information -->
+        <div class="flex items-center justify-center gap-2 text-[10px] text-slate-500 uppercase tracking-widest">
+            <span>SECURE SYSTEM</span>
+            <span class="text-slate-700">•</span>
+            <span>ENCRYPTED</span>
+        </div>
+
+    </div>
+
+
+    <!-- Embedded Interactive JavaScript -->
+    <script>
+
+        // Secret passcode
+        const SECRET_CODE = "4040";
+
+        // Current user input
+        let currentInput = "";
+
+
+        // -----------------------------------------
+        // Number Button
+        // -----------------------------------------
+
+        function pressNum(num) {
+
+            // Maximum 4 digits
+            if (currentInput.length < 4) {
+
+                currentInput += num;
+
+                updateDisplay();
+            }
+        }
+
+
+        // -----------------------------------------
+        // Clear Button
+        // -----------------------------------------
+
+        function clearInput() {
+
+            currentInput = "";
+
+            const status =
+                document.getElementById("status-message");
+
+            const indicator =
+                document.getElementById("status-indicator");
+
+
+            // Reset status message
+            status.innerText = "SYSTEM LOCKED";
+
+            status.className =
+                "text-xs font-semibold text-slate-400 uppercase tracking-wide";
+
+
+            // Reset indicator
+            indicator.className =
+                "w-2.5 h-2.5 rounded-full bg-rose-400 animate-pulse";
+
+
+            // Reset display
+            updateDisplay();
+        }
+
+
+        // -----------------------------------------
+        // Update Passcode Display
+        // -----------------------------------------
+
+        function updateDisplay() {
+
+            const display =
+                document.getElementById("passcode-display");
+
+
+            // Show entered numbers + dashes
+            display.innerText =
+                currentInput.padEnd(4, "-");
+
+
+            // Change display color
+            display.classList.remove("text-slate-500");
+
+            display.classList.add("text-sky-400");
+        }
+
+
+        // -----------------------------------------
+        // Submit Passcode
+        // -----------------------------------------
+
+        function submitCode() {
+
+            const status =
+                document.getElementById("status-message");
+
+            const indicator =
+                document.getElementById("status-indicator");
+
+
+            // Correct passcode
+            if (currentInput === SECRET_CODE) {
+
+                status.innerText =
+                    "ACCESS GRANTED - DOOR UNLOCKED!";
+
+
+                status.className =
+                    "text-xs font-bold text-emerald-400 uppercase tracking-wide";
+
+
+                // Green indicator
+                indicator.className =
+                    "w-2.5 h-2.5 rounded-full bg-emerald-400";
+
+
+            }
+
+            // Wrong passcode
+            else {
+
+                status.innerText =
+                    "INVALID PASSCODE - ACCESS DENIED";
+
+
+                status.className =
+                    "text-xs font-bold text-rose-400 uppercase tracking-wide";
+
+
+                // Red blinking indicator
+                indicator.className =
+                    "w-2.5 h-2.5 rounded-full bg-rose-400 animate-pulse";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
